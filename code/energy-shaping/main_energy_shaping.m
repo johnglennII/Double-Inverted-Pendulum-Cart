@@ -91,7 +91,7 @@ for k = 1:num_samples-1
     if abs(x_wrapped(3)) < 15*pi/180 && abs(x_wrapped(5)) < 15*pi/180 && abs(x_current(6)) < 2 || switched
         % LMPC Controller
         u_current = solve_LMPC(x_wrapped, H, F, -75*ones(N,1), 75*ones(N,1));
-        ctrl_mode_history(k) = 2;
+        ctrl_mode_history(k+1) = 2;
         switched = true;
         
         % u_current = -K_lqr*(x_wrapped-xstar);
@@ -187,21 +187,29 @@ time = text(2, 2, 't=0.0 s');
 % time = annotation('textbox', [0.75 0.85 0.2 0.1], 'String', 't=0.0 s', 'EdgeColor', 'none');
 
 pause(.75)
-tic
+idx = 1;
+startTime = tic;
 % animation loop
-for k = 1:refresh_rate:num_samples
+while idx < num_samples
+    elapsed = toc(startTime);
 
-    if ctrl_mode_history(k) == 1
+    % Find the index in the simulation time vector 't' that matches real-world time
+    % We use a simple search here; for very high-frequency data, use binary search
+    while idx < num_samples && t(idx) < elapsed
+        idx = idx + 1;
+    end
+
+    if ctrl_mode_history(idx) == 1
         set(h_ctrl_mode, 'String', 'Swing-up', 'Color', '#D95319');
-    elseif ctrl_mode_history(k) == 2
+    elseif ctrl_mode_history(idx) == 2
         set(h_ctrl_mode, 'String', 'MPC', 'Color', '#77AC30');
     end
     % update positions
-    set(h_cart, 'Position', [j1_x(k)-.5*cart_width, -.5*cart_height, cart_width, cart_height])
-    set(h_link1, 'XData', [j1_x(k), j2_x(k)], 'YData', [j1_y(k), j2_y(k)])
-    set(h_link2, 'XData', [j2_x(k), ee_x(k)], 'YData', [j2_y(k), ee_y(k)])
-    set(h_joints, 'XData', [j1_x(k), j2_x(k)], 'Ydata', [j1_y(k), j2_y(k)])
-    set(time, 'string', sprintf('t=%.1f s', t(k)));
+    set(h_cart, 'Position', [j1_x(idx)-.5*cart_width, -.5*cart_height, cart_width, cart_height])
+    set(h_link1, 'XData', [j1_x(idx), j2_x(idx)], 'YData', [j1_y(idx), j2_y(idx)])
+    set(h_link2, 'XData', [j2_x(idx), ee_x(idx)], 'YData', [j2_y(idx), ee_y(idx)])
+    set(h_joints, 'XData', [j1_x(idx), j2_x(idx)], 'Ydata', [j1_y(idx), j2_y(idx)])
+    set(time, 'string', sprintf('t=%.1f s', t(idx)));
     drawnow
 end
 t_anim = toc;
