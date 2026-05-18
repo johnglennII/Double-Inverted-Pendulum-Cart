@@ -113,7 +113,6 @@ set(groot, 'defaultAxesFontSize', 'remove')
 export_plt = input('Export Plots? y/n: ', 's');
 
 refresh_rate = 1;
-pause_t = 0.002;
 
 [f1, f2, f3] = dip_plots(t, x_history, params, num_samples, refresh_rate, u_history, ctrl_mode_history);
 t_switch = t(find(ctrl_mode_history==2, 1, 'first'));
