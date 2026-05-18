@@ -169,9 +169,11 @@ legend('', '','switch time');
 xlabel('time (s)')
 
 if export_plt == 'y'
-    exportgraphics(f2, fullfile('Report', 'traj_opt', 'pos_u.png'), 'Resolution', 300);
-    exportgraphics(f3, fullfile('Report', 'traj_opt', 'states.png'), 'Resolution', 300);
-    exportgraphics(f4, fullfile('Report', 'traj_opt', 'state_traj.png'), 'Resolution', 300);
-    exportgraphics(f5, fullfile('Report', 'traj_opt', 'state_error.png'), 'Resolution', 300);
-    exportgraphics(f6, fullfile('Report', 'traj_opt', 'input_traj.png'), 'Resolution', 300);
+    currentPath = fileparts(mfilename('fullpath'));
+    mediaPath = fullfile(currentPath, '..', '..', 'media', 'trajectory_optimization');
+    exportgraphics(f2, fullfile(mediaPath, 'pos_u.png'), 'Resolution', 300);
+    exportgraphics(f3, fullfile(mediaPath, 'states.png'), 'Resolution', 300);
+    exportgraphics(f4, fullfile(mediaPath, 'state_traj.png'), 'Resolution', 300);
+    exportgraphics(f5, fullfile(mediaPath, 'state_error.png'), 'Resolution', 300);
+    exportgraphics(f6, fullfile(mediaPath, 'input_traj.png'), 'Resolution', 300);
 end

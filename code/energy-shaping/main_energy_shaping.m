@@ -65,7 +65,7 @@ N = 30;
 
 % integrator settings
 options = odeset('AbsTol', 1e-12, 'RelTol', 1e-12);
-tf = 30;
+tf = 35;
 dt = 0.001;
 t = 0:dt:tf;
 num_samples = length(t);
@@ -165,7 +165,7 @@ ee_x = j2_x - L2.*sin(x5_history);
 ee_y = j2_y + L2.*cos(x5_history);
 
 % --Animation--
-f1 = figure('Name', 'Double Inverted Pendulum', 'Color', 'w');
+f1 = figure('Name', 'Double Inverted Pendulum', 'Color', 'w', 'WindowState', 'maximized');
 hold on; grid on; axis equal;
 
 % axis limits
@@ -182,8 +182,8 @@ h_cart = rectangle('Position', [j1_x(1)-.5*cart_width, -.5*cart_height, cart_wid
 h_link1 = plot([j1_x(1), j2_x(1)], [j1_y(1), j2_y(1)], 'color', [0, 0.4470, 0.7410]);
 h_link2 = plot([j2_x(1), ee_x(1)], [j2_y(1), ee_y(1)], 'color', [0, 0.4470, 0.7410]);
 h_joints = plot([j1_x(1), j2_x(1)], [j1_y(1), j2_y(1)], 'o', 'MarkerSize', 3, 'MarkerFaceColor', [0, 0.4470, 0.7410], 'Color', [0, 0.4470, 0.7410]);
-h_ctrl_mode = text(2, (L1+L2+.45), 'Swing-up', 'Color', '#D95319');
-time = text(2, 2, 't=0.0 s');
+h_ctrl_mode = text(2, (L1+L2+.35), 'Tracking', 'Color', '#D95319');
+time = text(2, (L1+L2+.45), 't=0.0 s');
 % time = annotation('textbox', [0.75 0.85 0.2 0.1], 'String', 't=0.0 s', 'EdgeColor', 'none');
 
 pause(.75)
@@ -277,7 +277,9 @@ plot(t, [x5_history; x6_history])
 legend('$\theta_2$', '$\dot{\theta}_2$')
 
 if export_plt == 'y'
-    exportgraphics(f2, fullfile('Report', 'E_shaping', 'theta_u_E.png'), 'Resolution', 300);
-    exportgraphics(f3, fullfile('Report', 'E_shaping', 'cart_v_u.png'), 'Resolution', 300);
-    exportgraphics(f4, fullfile('Report', 'E_shaping', 'states.png'), 'Resolution', 300);
+    currentPath = fileparts(mfilename('fullpath'));
+    mediaPath = fullfile(currentPath, '..', '..', 'media', 'energy_shaping');
+    exportgraphics(f2, fullfile(mediaPath, 'theta_u_E.png'), 'Resolution', 300);
+    exportgraphics(f3, fullfile(mediaPath, 'cart_v_u.png'), 'Resolution', 300);
+    exportgraphics(f4, fullfile(mediaPath, 'states.png'), 'Resolution', 300);
 end
