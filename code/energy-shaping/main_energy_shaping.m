@@ -212,7 +212,7 @@ while idx < num_samples
     set(time, 'string', sprintf('t=%.1f s', t(idx)));
     drawnow
 end
-t_anim = toc;
+t_anim = toc(startTime);
 fprintf('Animation time: %.2fs\n', t_anim);
 
 
