@@ -43,8 +43,6 @@ n = length(x0);
 % control design
 [A,B,C] = compute_linearized_dynamics(xstar, ustar, params);
 Q = diag([.1, .01, 15, 5, 15, .5]); % WORKING
-% Q = diag([.1, .01, 50, 25, 25, .5]);
-% Qf = Q;
 R = 1;
 
 % WORKING GAINS:
