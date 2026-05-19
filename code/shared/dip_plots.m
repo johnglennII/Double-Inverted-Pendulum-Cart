@@ -99,28 +99,42 @@ t_anim = toc(startTime);
 fprintf('Animation time: %.2fs\n', t_anim);
 
 
-if nargout > 1
-    % --xc, theta, u vs time--
+if nargout == 2
+    % == xc, theta, u vs time ==
     varargout{1} = figure;
     tl = tiledlayout(3,1, 'Padding', 'compact');
     title(tl, sprintf('Positions, Input'), 'interpreter', 'latex');
-    nexttile
-    hold on; grid on;
-    title('$x_c$ (m)')
-    plot(t, x1_history)
 
-    nexttile
+    % -Cart position-
+    ax1 = nexttile;
     hold on; grid on;
-    title('$\theta_1$ and $\theta_2$ (rad)')
+    title('Cart position (m)')
+    plot(t, x1_history)
+    yline(0,'k--')
+    legend('$x_c$')
+    xticklabels({})
+
+    % -Pendulum angles-
+    ax2 = nexttile;
+    hold on; grid on;
+    title('Pendulum angles (rad)')
     plot(t, [x3_history; x5_history])
+    yline(0, 'k--')
     legend('$\theta_1$', '$\theta_2$')
+    xticklabels({})
     
-    nexttile
+    % -Control input-
+    ax3 = nexttile;
     hold on; grid on;
-    title('Control Input: u (N)')
+    title('Control Input (N)')
     plot(t, u_history);
+    legend('$u$')
     xlabel('time (s)')
+
+    linkaxes([ax1, ax2, ax3], 'x');
+end
     
+if nargout == 3
     % states vs time
     varargout{2} = figure;
     subplot(3,1,1)
