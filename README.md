@@ -11,8 +11,8 @@ In this project, I
 ### 1. Control System Comparison
 
 <p align="center">
-  <img src="./media/trajectory_optimization/trajectory_optimization_vid.webp" width="49%" alt="Control System Demonstration"/>
-  <img src="./media/energy_shaping/energy_shaping_vid.webp" width="49%" alt="Control System Demonstration"/>
+  <img src="./media/trajectory_optimization/trajectory_optimization_vid.webp" width="49%" alt="Trajectory Optimization Demonstration"/>
+  <img src="./media/energy_shaping/energy_shaping_vid.webp" width="49%" alt="Energy Shaping Demonstration"/>
 </p>
 
 ### 2. Trajectory Optimization: Actual vs Reference, Positions and Input
