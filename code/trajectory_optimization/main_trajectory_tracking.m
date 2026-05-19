@@ -120,8 +120,8 @@ refresh_rate = 1;
 [f1, f2, f3] = dip_plots(t, x_history, params, num_samples, refresh_rate, u_history, ctrl_mode_history);
 t_switch = t(find(ctrl_mode_history==2, 1, 'first'));
 
-% Reference vs Actual: States
-f4 = figure('WindowState', 'maximized');
+% --Reference vs Actual: States--
+f4 = figure('WindowState', 'normal');
 tl = tiledlayout(6,1, 'Padding', 'compact');
 title(tl, sprintf('State Trajectory: Actual vs Reference'), 'interpreter', 'latex');
 for l = 1:n
@@ -134,9 +134,9 @@ xlabel('time (s)')
 lgd = legend(ax(1), h(1:2), {'$x_{actual}$', '$X^*$'});
 lgd.Location = 'northeast';
 
-% Tracking Error: States
+% --Tracking Error: States--
 tracking_err_x = x_history - X_star;
-f5 = figure('WindowState', 'maximized');
+f5 = figure('WindowState', 'normal');
 tl = tiledlayout(6,1, 'Padding', 'compact');
 title(tl, sprintf('Tracking Error: States'), 'interpreter', 'latex');
 for l = 1:n
@@ -151,9 +151,9 @@ lgd = legend(ax(1), {'', '','switch time'});
 lgd.Location = 'northeast';
 xlabel('time (s)')
 
-% Reference vs Actual: Inputs
+% --Reference vs Actual: Inputs--
 tracking_err_u = u_history - U_star;
-f6 = figure('WindowState', 'maximized');
+f6 = figure('WindowState', 'normal');
 % both
 subplot(2,1,1)
 hold on; grid on;

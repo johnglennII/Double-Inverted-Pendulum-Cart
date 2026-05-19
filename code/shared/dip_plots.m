@@ -102,20 +102,22 @@ fprintf('Animation time: %.2fs\n', t_anim);
 if nargout > 1
     % --xc, theta, u vs time--
     varargout{1} = figure;
-    subplot(3,1,1)
+    tl = tiledlayout(3,1, 'Padding', 'compact');
+    title(tl, sprintf('Positions, Input'), 'interpreter', 'latex');
+    nexttile
     hold on; grid on;
-    title('$x_c$')
+    title('$x_c$ (m)')
     plot(t, x1_history)
 
-    subplot(3,1,2)
+    nexttile
     hold on; grid on;
-    title('$\theta_1$ and $\theta_2$')
+    title('$\theta_1$ and $\theta_2$ (rad)')
     plot(t, [x3_history; x5_history])
     legend('$\theta_1$', '$\theta_2$')
     
-    subplot(3,1,3)
+    nexttile
     hold on; grid on;
-    title('Control Input: u')
+    title('Control Input: u (N)')
     plot(t, u_history);
     xlabel('time (s)')
     
