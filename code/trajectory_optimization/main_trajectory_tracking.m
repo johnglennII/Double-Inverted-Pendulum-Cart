@@ -25,7 +25,17 @@ x_star = zeros(6,1); % up-up
 u_star = 0;
 n = length(x0);
 
+% integrator settings
+options = odeset('AbsTol', 1e-12, 'RelTol', 1e-12);
+tf = 10;
+dt = 0.01;
+t = 0:dt:tf;
+num_samples = length(t);
+
 load('reference_traj.mat')
+N_su = size(X_star,2);
+X_star = [X_star, zeros(n, length(t)-N_su)];
+U_star = [U_star, zeros(1, length(t)-N_su)];
 
 % === Control Design ===
 R = .001;
@@ -38,13 +48,6 @@ sys_c = ss(A,B,C,0);
 sys_d = c2d(sys_c, dt_mpc);
 Af = sys_d.A; Bf = sys_d.B;
 [~, Qf, ~] = dlqr(Af, Bf, Q, R);
-
-% integrator settings
-options = odeset('AbsTol', 1e-12, 'RelTol', 1e-12);
-tf = 6;
-dt = 0.01;
-t = 0:dt:tf;
-num_samples = length(t);
 
 % pre-allocate
 x_history = nan(n, num_samples);
@@ -94,7 +97,7 @@ for k = 1:num_samples-1
     end
 
     x_wrapped = x_current; x_wrapped(3) = wrapToPi(x_current(3)); x_wrapped(5) = wrapToPi(x_current(5));
-    if abs(x_wrapped(3)) < 2*pi/180 && abs(x_wrapped(5)) < 2*pi/180
+    if abs(x_wrapped(3)) < 1*pi/180 && abs(x_wrapped(5)) < 1*pi/180
         tracking = false;
     end
 end
