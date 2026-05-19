@@ -65,8 +65,8 @@ h_cart = rectangle('Position', [j1_x(1)-.5*cart_width, -.5*cart_height, cart_wid
 h_link1 = plot([j1_x(1), j2_x(1)], [j1_y(1), j2_y(1)], 'color', [0, 0.4470, 0.7410]);
 h_link2 = plot([j2_x(1), ee_x(1)], [j2_y(1), ee_y(1)], 'color', [0, 0.4470, 0.7410]);
 h_joints = plot([j1_x(1), j2_x(1)], [j1_y(1), j2_y(1)], 'o', 'MarkerSize', 3, 'MarkerFaceColor', [0, 0.4470, 0.7410], 'Color', [0, 0.4470, 0.7410]);
-h_ctrl_mode = text(2, (L1+L2+.35), 'Tracking', 'Color', '#D95319');
-time = text(2, (L1+L2+.45), 't=0.0 s');
+h_ctrl_mode = text(2, (L1+L2+.45), 'Tracking', 'Color', '#D95319');
+time = text(2, (L1+L2+.35), 't=0.0 s');
 
 pause(.75)
 idx = 1;
