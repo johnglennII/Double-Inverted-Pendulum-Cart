@@ -31,5 +31,5 @@ In this project, I
 
 ## Skills & Software Used
 * **Software:** MATLAB, Simulink,
-* **Hardware:** 
+* **Hardware:** N/A
 <!--**Concepts:** -->
