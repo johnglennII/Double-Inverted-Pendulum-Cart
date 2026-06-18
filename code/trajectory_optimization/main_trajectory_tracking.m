@@ -76,6 +76,10 @@ for k = 1:num_samples-1
         % sys_c_k = ss(A_k,B_k,C_k,0);
         % sys_dk = c2d(sys_c_k, dt_mpc);
         % Ad_k = sys_dk.A; Bd_k = sys_dk.B;
+
+        x_star_k = zeros(6,1);
+        u_star_k = 0;
+
         [H, F] = setup_LMPC(Af,Bf,Q,R,Qf,N_mpc);
         ctrl_mode_history(k+1) = 2;
     end
